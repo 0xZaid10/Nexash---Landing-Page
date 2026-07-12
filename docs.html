@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://db.onlinewebfonts.com/c/8b75d9dcff6a48c35a46656192adf019?family=FSP+DEMO+-+PODIUM+Sharp+4.11">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #000000; color: #F9FAFB; font-family: 'Inter', -apple-system, sans-serif; overflow-x: hidden; }
+a { color: #60A5FA; text-decoration: none; }
+a:hover { color: #93C5FD; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb { background: #1C1C1C; border-radius: 4px; }
+.nxc { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.nx-hide-mobile { }
+.nx-show-mobile { display: none !important; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; background: #080808; border: 1px solid #222222; padding: 1px 6px; border-radius: 3px; color: #60A5FA; }
+pre { background: #080808; border: 1px solid #222222; border-radius: 8px; padding: 18px 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #9CA3AF; line-height: 1.85; overflow-x: auto; }
+.nx-table { width: 100%; border-collapse: collapse; }
+.nx-table th { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #4B5563; font-weight: 600; padding: 10px 16px; text-align: left; border-bottom: 1px solid #1C1C1C; background: #080808; }
+.nx-table td { padding: 11px 16px; font-size: 0.84rem; color: #D1D5DB; border-bottom: 1px solid #1C1C1C; vertical-align: top; line-height: 1.6; }
+.nx-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #60A5FA; white-space: nowrap; }
+.nx-docs-layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+.nx-sidebar { position: sticky; top: 115px; }
+@media (max-width: 768px) {
+  .nx-hide-mobile { display: none !important; }
+  .nx-show-mobile { display: flex !important; }
+  .nxc { padding: 0 20px; }
+  .nx-docs-layout { grid-template-columns: 1fr; }
+  .nx-sidebar { display: none; }
+}
+@keyframes fade-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.fu  { animation: fade-up 0.8s ease-out 0.0s forwards; opacity: 0; }
+.fu1 { animation: fade-up 0.8s ease-out 0.15s forwards; opacity: 0; }
+.fu2 { animation: fade-up 0.8s ease-out 0.30s forwards; opacity: 0; }
+</style>
+</helmet>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(0,0,0,0.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(31,41,55,0.6)">
+  <div class="nxc" style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px">
+    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <span style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:1.35rem;font-weight:900;letter-spacing:0.18em;color:#F9FAFB;text-transform:uppercase">NEXASH</span>
+    </a>
+    <div class="nx-hide-mobile" style="display:flex;align-items:center;gap:36px">
+      <a href="/" style="font-size:0.72rem;font-weight:500;color:rgba(255,255,255,0.65);letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Home</a>
+      <a href="/features" style="font-size:0.72rem;font-weight:500;color:rgba(255,255,255,0.65);letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Features</a>
+      <a href="/docs" style="font-size:0.72rem;font-weight:500;color:#F9FAFB;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.4);padding-bottom:2px">Docs</a>
+    </div>
+    <a href="https://t.me/nexash_horizon_bot" target="_blank" class="nx-hide-mobile" style="display:inline-flex;align-items:center;gap:8px;background:#3B82F6;color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:10px 20px;border-radius:5px;text-decoration:none;transition:background 0.2s" style-hover="background:#2563EB">
+      Open in Telegram
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+    </a>
+    <button class="nx-show-mobile" onClick="{{ toggleMenu }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:4px">
+      <div style="width:22px;height:2px;background:#F9FAFB;border-radius:2px"></div>
+      <div style="width:22px;height:2px;background:#F9FAFB;border-radius:2px"></div>
+      <div style="width:14px;height:2px;background:#F9FAFB;border-radius:2px"></div>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div style="{{ overlayStyle }}">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;margin-bottom:48px">
+    <span style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:1.35rem;font-weight:900;letter-spacing:0.18em;color:#F9FAFB;text-transform:uppercase">NEXASH</span>
+    <button onClick="{{ closeMenu }}" style="background:none;border:none;cursor:pointer;color:#F9FAFB;padding:8px;display:flex;align-items:center;justify-content:center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <a href="/" onClick="{{ closeMenu }}" style="{{ ml1 }}">Home</a>
+    <a href="/features" onClick="{{ closeMenu }}" style="{{ ml2 }}">Features</a>
+    <a href="/docs" onClick="{{ closeMenu }}" style="{{ ml3 }}">Docs</a>
+  </div>
+  <div style="padding-bottom:36px">
+    <a href="https://t.me/nexash_horizon_bot" target="_blank" style="{{ mlCta }}">
+      Open in Telegram
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section style="padding:140px 0 80px;background:#000000;border-bottom:1px solid #1C1C1C">
+  <div class="nxc">
+    <p class="fu" style="font-size:0.65rem;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;color:#3B82F6;margin-bottom:18px">DOCUMENTATION</p>
+    <h1 class="fu1" style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(2.6rem,7vw,5.5rem);font-weight:900;text-transform:uppercase;line-height:0.95;letter-spacing:-0.015em;color:#F9FAFB;margin-bottom:24px">Documentation</h1>
+    <p class="fu2" style="font-size:1rem;color:rgba(249,250,251,0.55);line-height:1.75;max-width:520px">Everything you need to understand, use, and build with Nexash.</p>
+  </div>
+</section>
+
+<!-- DOCS BODY -->
+<div class="nxc" style="padding-top:56px;padding-bottom:96px">
+  <div class="nx-docs-layout">
+
+    <!-- SIDEBAR -->
+    <div class="nx-sidebar" style="padding-right:32px;border-right:1px solid #1C1C1C">
+      <p style="font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#4B5563;margin-bottom:14px">On this page</p>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <a href="#getting-started" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">Getting Started</a>
+        <a href="#commands" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">Commands</a>
+        <a href="#contracts" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">Smart Contracts</a>
+        <a href="#hsp" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">HSP Integration</a>
+        <a href="#api" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">API Reference</a>
+        <a href="#architecture" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">Architecture</a>
+        <a href="#ecosystem" style="font-size:0.82rem;color:#9CA3AF;text-decoration:none;padding:5px 8px;border-radius:4px;transition:all 0.15s" style-hover="color:#F9FAFB;background:rgba(255,255,255,0.04)">HashKey Ecosystem</a>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div style="padding-left:48px;min-width:0">
+
+      <!-- GETTING STARTED -->
+      <section id="getting-started" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">Start in 4 commands</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">Getting Started</p>
+
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:8px">Step 1 — Open the bot</p>
+            <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-bottom:10px">Search @nexash_horizon_bot on Telegram or tap the link: <a href="https://t.me/nexash_horizon_bot" target="_blank" style="color:#60A5FA">t.me/nexash_horizon_bot</a></p>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:8px">Step 2 — Create your wallet</p>
+            <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-bottom:10px">Send /start. A wallet is created for you instantly.</p>
+            <pre><span style="color:#60A5FA">/start</span></pre>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:8px">Step 3 — Get testnet funds</p>
+            <pre><span style="color:#60A5FA">/faucet</span></pre>
+            <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-top:10px">Your wallet receives testnet USDC from the HSP faucet automatically.</p>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:8px">Step 4 — Verify KYC</p>
+            <pre><span style="color:#60A5FA">/kyc</span></pre>
+            <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-top:10px">A KYC attestation is issued and anchored on HashKey Chain mainnet. Required before sending any compliant payment.</p>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:8px">Step 5 — Send a payment</p>
+            <pre><span style="color:#60A5FA">/pay 10 0xRecipientAddress</span></pre>
+            <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-top:10px">That is it. Nexash handles the rest — compliance check, HSP mandate, on-chain transfer, and verification.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMMANDS -->
+      <section id="commands" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">All commands</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">Command Reference</p>
+        <div style="border:1px solid #1C1C1C;border-radius:8px;overflow:hidden">
+          <table class="nx-table">
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>/start</td><td>Create your wallet and get started</td></tr>
+              <tr><td>/wallet</td><td>Show your address, HSK balance, and USDC balance</td></tr>
+              <tr><td>/faucet</td><td>Fund your wallet with testnet USDC</td></tr>
+              <tr><td>/kyc</td><td>Issue a KYC attestation on HashKey Chain mainnet</td></tr>
+              <tr><td>/pay [amount] [address]</td><td>Send a compliant HSP payment</td></tr>
+              <tr><td>/market [pair]</td><td>Live market data + AI multi-timeframe analysis</td></tr>
+              <tr><td>/trade buy [pair] [USD]</td><td>Paper trade — buy with real prices</td></tr>
+              <tr><td>/trade sell [pair] [USD]</td><td>Paper trade — sell with real prices</td></tr>
+              <tr><td>/portfolio</td><td>Your paper portfolio with live P&amp;L</td></tr>
+              <tr><td>/attest [address]</td><td>Check KYC status for any address on-chain</td></tr>
+              <tr><td>/link</td><td>Connect your Telegram account to the web dashboard</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SMART CONTRACTS -->
+      <section id="contracts" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">Contract reference</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">Smart Contracts</p>
+
+        <p style="font-size:0.88rem;font-weight:600;color:#F9FAFB;margin-bottom:12px">AttestationRegistry</p>
+        <pre style="margin-bottom:16px">Address:  <span style="color:#60A5FA">0x093393dB86DCFAe9565dbD9Fa03332D5CB3b6362</span>
+Network:  HashKey Chain Mainnet
+chainId:  177
+Explorer: <a href="https://hsk.blockscout.com/address/0x093393dB86DCFAe9565dbD9Fa03332D5CB3b6362" target="_blank" style="color:#60A5FA">hsk.blockscout.com/address/0x0933...</a></pre>
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4B5563;margin-bottom:8px">Key functions</p>
+        <pre style="margin-bottom:32px"><span style="color:#A855F7">isIssuer</span>(address issuer) → bool
+<span style="color:#A855F7">isValid</span>(address subject, bytes32 capability) → bool
+<span style="color:#A855F7">recordAttestation</span>(address subject, bytes32 capability, ...) → void</pre>
+
+        <p style="font-size:0.88rem;font-weight:600;color:#F9FAFB;margin-bottom:12px">PayrollTreasury</p>
+        <pre style="margin-bottom:16px">Address:  <span style="color:#60A5FA">0x06D99B9232056034B218bCDe88753820bCdF6AC4</span>
+Network:  HashKey Chain Mainnet
+chainId:  177
+Explorer: <a href="https://hsk.blockscout.com/address/0x06D99B9232056034B218bCDe88753820bCdF6AC4" target="_blank" style="color:#60A5FA">hsk.blockscout.com/address/0x06D9...</a></pre>
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4B5563;margin-bottom:8px">Key functions</p>
+        <pre style="margin-bottom:32px"><span style="color:#A855F7">releasePayment</span>(address payee, uint256 amount, address token) → void
+<span style="color:#A855F7">addPayee</span>(string identifier, address payeeAddress, Policy policy) → void</pre>
+
+        <p style="font-size:0.88rem;font-weight:600;color:#F9FAFB;margin-bottom:12px">Registered Issuer</p>
+        <pre>Address:     <span style="color:#60A5FA">0xb625c4699784c6bEDabB6A83005981a7c14186D3</span>
+IssuerKeyId: <span style="color:#60A5FA">0xf6520f2a7b8e4e844f55cc8da9d56ab5745e853b...</span>
+HSP families: attests:kyc:v1, attests:sanctions:v1</pre>
+      </section>
+
+      <!-- HSP INTEGRATION -->
+      <section id="hsp" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">How Nexash uses HSP</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">HSP Integration</p>
+        <p style="font-size:0.88rem;color:#9CA3AF;line-height:1.75;margin-bottom:24px">Nexash is registered as a trusted compliance issuer on the HashKey Settlement Protocol sandbox. Here is how the integration works.</p>
+
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4B5563;margin-bottom:8px">Capability IDs</p>
+        <pre style="margin-bottom:24px">attests:kyc:v1[level=full] role-wrapped (mandate):
+<span style="color:#60A5FA">0xe176eab87495d286f7e5298e98297365377824ec...</span>
+
+attests:kyc:v1[level=full] base (attestation):
+<span style="color:#60A5FA">0x232e9f37db21a178d9598188ea9294473f2f8897...</span>
+
+KYC schema ID:
+<span style="color:#60A5FA">0xedc9e4b795c2d81b19fe5080310f148e7f853b18...</span></pre>
+
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4B5563;margin-bottom:8px">HSP Coordinator (sandbox)</p>
+        <pre style="margin-bottom:24px">URL:   https://hsp-hackathon.hashkeymerchant.com
+Chain: hashkey-testnet (chainId 133)
+USDC:  <span style="color:#60A5FA">0x8FE3cB719Ee4410E236Cd6b72ab1fCDC06eF53c6</span></pre>
+
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4B5563;margin-bottom:8px">Proven compliant payment</p>
+        <pre>paymentId: <span style="color:#60A5FA">0xaddf28bcff42219b1dbaebfc1578aadc671b5ee4...</span>
+Verdict:   <span style="color:#10B981">ACCEPT</span>
+Issuer:    Nexash (<span style="color:#60A5FA">0xb625c469...</span>)</pre>
+      </section>
+
+      <!-- API REFERENCE -->
+      <section id="api" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">Backend API</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">API Reference</p>
+
+        <div style="background:#0F0F0F;border:1px solid #1C1C1C;border-radius:8px;padding:14px 18px;margin-bottom:24px">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#9CA3AF">Base URL: <span style="color:#60A5FA">https://api.nexash.xyz</span> <span style="color:#4B5563">(coming soon — currently on EC2)</span></p>
+        </div>
+        <p style="font-size:0.82rem;color:#9CA3AF;margin-bottom:6px">Protected endpoints require header:</p>
+        <pre style="margin-bottom:28px">X-Nexash-Operator-Key: &lt;operator key&gt;</pre>
+
+        <p style="font-size:0.82rem;font-weight:700;color:#F9FAFB;margin-bottom:10px">Attestations</p>
+        <pre style="margin-bottom:24px"><span style="color:#60A5FA">POST</span> /attestations/issue-kyc
+Body: { subject, reportTxHash, taskId, templateId }
+→ { hspAttestation, hspLevel, onChainTxHash }
+
+<span style="color:#60A5FA">GET</span>  /attestations/:subject
+→ { hasAttestation, attestation: { kycLevel, isValid, expiresAt } }</pre>
+
+        <p style="font-size:0.82rem;font-weight:700;color:#F9FAFB;margin-bottom:10px">Payments</p>
+        <pre style="margin-bottom:24px"><span style="color:#60A5FA">POST</span> /payments/release
+Body: { payeeIdentifier, token, amount, requiredCapabilities }
+→ { paymentId, status, decision }
+
+<span style="color:#60A5FA">GET</span>  /payments/:paymentId
+→ { paymentId, status, mandate, receipts, lastDecision }</pre>
+
+        <p style="font-size:0.82rem;font-weight:700;color:#F9FAFB;margin-bottom:10px">Payroll</p>
+        <pre style="margin-bottom:24px"><span style="color:#60A5FA">POST</span> /institutions/payroll/parse
+Body: { instruction }
+→ { proposedPayments, unresolvedReferences }
+
+<span style="color:#60A5FA">POST</span> /institutions/payroll/review
+Body: { proposedPayments }
+→ { flags, summary, advisoryOnly: true }</pre>
+
+        <p style="font-size:0.82rem;font-weight:700;color:#F9FAFB;margin-bottom:10px">Trading</p>
+        <pre><span style="color:#60A5FA">POST</span> /trading/ask
+Body: { userId, question, pairs }
+→ { reasoning, confidence, proposedAction, portfolio }
+
+<span style="color:#60A5FA">GET</span>  /trading/:userId/portfolio
+→ { portfolio, unrealizedPnl, totalPnl }</pre>
+      </section>
+
+      <!-- ARCHITECTURE -->
+      <section id="architecture" style="margin-bottom:72px">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">How it all fits together</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">Architecture</p>
+        <pre style="margin-bottom:24px">┌─────────────────────────────────────────┐
+│           Telegram Bot                  │
+│  /start /wallet /faucet /kyc /pay       │
+│  /market /trade /portfolio /attest      │
+└─────────────┬───────────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────────┐
+│         Nexash Backend                  │
+│                                         │
+│  ┌──────────┐  ┌──────────────────────┐ │
+│  │Venice AI │  │  HSP Mandate Builder │ │
+│  │(GLM-5.2) │  │  + Coordinator Client│ │
+│  └──────────┘  └──────────────────────┘ │
+│                                         │
+│  ┌──────────┐  ┌──────────────────────┐ │
+│  │HashKey   │  │  Nexash Issuer       │ │
+│  │Exchange  │  │  (KYC attestations)  │ │
+│  │  API     │  └──────────────────────┘ │
+│  └──────────┘                           │
+└──────┬──────────────────────┬───────────┘
+       │                      │
+       ▼                      ▼
+┌─────────────┐    ┌──────────────────────┐
+│  HSP        │    │  HashKey Chain       │
+│  Coordinator│    │  Mainnet (177)       │
+│  (testnet)  │    │                      │
+│             │    │  AttestationRegistry │
+│  ACCEPT /   │    │  PayrollTreasury     │
+│  REJECT     │    └──────────────────────┘
+└─────────────┘</pre>
+        <div style="background:#0F0F0F;border:1px solid #1C1C1C;border-radius:8px;padding:18px 20px">
+          <p style="font-size:0.82rem;font-weight:600;color:#F9FAFB;margin-bottom:10px">Two independent compliance rails</p>
+          <p style="font-size:0.85rem;color:#9CA3AF;line-height:1.75">Rail 1 — HSP: mandate + attestation → Coordinator verifies cryptographically → ACCEPT</p>
+          <p style="font-size:0.85rem;color:#9CA3AF;line-height:1.75;margin-top:4px">Rail 2 — Contract: PayrollTreasury reads AttestationRegistry → transfer or revert</p>
+          <p style="font-size:0.85rem;color:#D1D5DB;font-weight:500;margin-top:10px">Neither rail trusts the other. Both must pass for a compliant payment.</p>
+        </div>
+      </section>
+
+      <!-- ECOSYSTEM -->
+      <section id="ecosystem" style="margin-bottom:0">
+        <h2 style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;text-transform:uppercase;color:#F9FAFB;line-height:1.06;margin-bottom:8px">Components used</h2>
+        <p style="font-size:0.82rem;color:#6B7280;margin-bottom:32px;border-bottom:1px solid #1C1C1C;padding-bottom:20px">HashKey Ecosystem</p>
+        <div style="border:1px solid #1C1C1C;border-radius:8px;overflow:hidden">
+          <table class="nx-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Role</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-family:'Inter',sans-serif;color:#D1D5DB;font-weight:500;white-space:normal">HashKey Chain mainnet (177)</td>
+                <td>Smart contract deployment, attestation storage</td>
+                <td><span style="color:#10B981;font-size:0.78rem;font-weight:600">Live</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:'Inter',sans-serif;color:#D1D5DB;font-weight:500;white-space:normal">HashKey Chain testnet (133)</td>
+                <td>HSP payment execution</td>
+                <td><span style="color:#10B981;font-size:0.78rem;font-weight:600">Live</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:'Inter',sans-serif;color:#D1D5DB;font-weight:500;white-space:normal">HashKey Settlement Protocol</td>
+                <td>Payment mandate + compliance verification</td>
+                <td><span style="color:#10B981;font-size:0.78rem;font-weight:600">Registered Issuer</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:'Inter',sans-serif;color:#D1D5DB;font-weight:500;white-space:normal">HashKey Exchange API</td>
+                <td>Market data, OHLCV, price feeds</td>
+                <td><span style="color:#10B981;font-size:0.78rem;font-weight:600">Live</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:'Inter',sans-serif;color:#D1D5DB;font-weight:500;white-space:normal">NexaID</td>
+                <td>zkTLS KYC evidence source</td>
+                <td><span style="color:#F59E0B;font-size:0.78rem;font-weight:600">In Development</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#000000;border-top:1px solid #1C1C1C;padding:48px 0;margin-top:0">
+  <div class="nxc">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px">
+      <div style="flex:none;min-width:180px">
+        <span style="font-family:'FSP DEMO - PODIUM Sharp 4.11','Arial Black',sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:0.18em;color:#F9FAFB;text-transform:uppercase;display:block;margin-bottom:12px">NEXASH</span>
+        <p style="font-size:0.8rem;color:#6B7280;line-height:1.65;max-width:210px">Compliant payments on HashKey Chain</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:56px">
+        <div>
+          <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#4B5563;font-weight:600;margin-bottom:14px">Pages</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <a href="/" style="font-size:0.85rem;color:#9CA3AF;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Home</a>
+            <a href="/features" style="font-size:0.85rem;color:#9CA3AF;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Features</a>
+            <a href="/docs" style="font-size:0.85rem;color:#F9FAFB;text-decoration:none">Docs</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#4B5563;font-weight:600;margin-bottom:14px">Connect</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <a href="https://t.me/nexash_horizon_bot" target="_blank" style="font-size:0.85rem;color:#9CA3AF;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Telegram</a>
+            <a href="https://hsk.blockscout.com" target="_blank" style="font-size:0.85rem;color:#9CA3AF;text-decoration:none;transition:color 0.2s" style-hover="color:#F9FAFB">Blockscout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1C1C1C;padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+      <p style="font-size:0.74rem;color:#4B5563">© 2026 Nexash · Contracts on HashKey Chain Mainnet · chainId 177</p>
+      <p style="font-size:0.74rem;color:#4B5563">Built for HashKey On-Chain Horizon Hackathon 2026</p>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = { menuOpen: false };
+  renderVals() {
+    const { menuOpen } = this.state;
+    const menuLinkBase = {
+      display: 'block',
+      fontFamily: "'FSP DEMO - PODIUM Sharp 4.11', 'Arial Black', sans-serif",
+      fontSize: 'clamp(2.8rem, 8vw, 4.8rem)',
+      color: '#F9FAFB',
+      textTransform: 'uppercase',
+      letterSpacing: '0.02em',
+      lineHeight: '1.08',
+      padding: '8px 0',
+      transition: 'opacity 0.5s, transform 0.5s',
+      opacity: menuOpen ? 1 : 0,
+      transform: menuOpen ? 'translateY(0)' : 'translateY(22px)',
+      cursor: 'pointer',
+      textDecoration: 'none',
+    };
+    return {
+      menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      overlayStyle: {
+        position: 'fixed', inset: 0, zIndex: 50,
+        backgroundColor: 'rgba(5,8,18,0.97)',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+        opacity: menuOpen ? 1 : 0, visibility: menuOpen ? 'visible' : 'hidden',
+        transition: 'opacity 0.45s, visibility 0.45s',
+        display: 'flex', flexDirection: 'column', padding: '18px 20px',
+      },
+      ml1: { ...menuLinkBase, transitionDelay: menuOpen ? '80ms'  : '0ms' },
+      ml2: { ...menuLinkBase, transitionDelay: menuOpen ? '160ms' : '0ms' },
+      ml3: { ...menuLinkBase, transitionDelay: menuOpen ? '240ms' : '0ms' },
+      mlCta: {
+        ...menuLinkBase, fontSize: '0.82rem', letterSpacing: '0.22em',
+        border: '1px solid rgba(255,255,255,0.2)', padding: '15px 28px',
+        display: 'inline-flex', alignItems: 'center', gap: '10px', marginTop: '36px',
+        transitionDelay: menuOpen ? '320ms' : '0ms',
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
